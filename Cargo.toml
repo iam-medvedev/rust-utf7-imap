@@ -3,6 +3,7 @@ name = "utf7-imap"
 version = "0.1.0"
 authors = ["Ilya Medvedev <ilya@medvedev.im>"]
 license = "MIT"
+homepage = "https://github.com/iam-medvedev/rust-utf7-imap"
 repository = "https://github.com/iam-medvedev/rust-utf7-imap"
 description = "Mailbox names decoder (UTF-7 IMAP RFC 3501)"
 keywords = ["mailbox", "decoder", "utf-7", "utf7", "imap", "rfc3501", "rfc 3501"]

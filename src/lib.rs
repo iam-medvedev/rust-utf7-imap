@@ -18,6 +18,8 @@ use regex::Regex;
 /// # Usage:
 ///
 /// ```
+/// use utf7_imap::decode_utf7_imap;
+///
 /// let test_string = String::from("&BB4EQgQ,BEAEMAQyBDsENQQ9BD0ESwQ1-");
 /// assert_eq!(decode_utf7_imap(test_string), "Отправленные");
 /// ```
@@ -57,7 +59,6 @@ fn decode_utf7_part(text: String) -> String {
 #[cfg(test)]
 mod tests {
   use super::*;
-
   #[test]
   fn decode_test() {
     let test_string = String::from("&BB4EQgQ,BEAEMAQyBDsENQQ9BD0ESwQ1-");

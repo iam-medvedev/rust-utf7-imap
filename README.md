@@ -20,7 +20,9 @@ utf7-imap = "0.1.0"
 ```
 
 ```rust
-fn decode_test() {
+use utf7_imap::decode_utf7_imap;
+
+fn main() {
   let test_string = String::from("&BB4EQgQ,BEAEMAQyBDsENQQ9BD0ESwQ1-");
   assert_eq!(decode_utf7_imap(test_string), "Отправленные");
 }
