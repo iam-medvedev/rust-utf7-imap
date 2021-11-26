@@ -6,7 +6,7 @@ license = "MIT"
 homepage = "https://github.com/iam-medvedev/rust-utf7-imap"
 repository = "https://github.com/iam-medvedev/rust-utf7-imap"
 description = "Mailbox names decoder (UTF-7 IMAP RFC 3501)"
-keywords = ["mailbox", "decoder", "utf-7", "utf7", "imap", "rfc3501", "rfc 3501"]
+keywords = ["mailbox", "decoder", "utf7", "imap", "rfc3501"]
 categories = ["parsing","encoding"]
 readme = "README.md"
 maintenance = { status = "experimental" }
