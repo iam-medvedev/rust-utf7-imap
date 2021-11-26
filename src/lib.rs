@@ -1,3 +1,9 @@
+//! A Rust library for decoding [UTF-7](https://datatracker.ietf.org/doc/html/rfc2152) string as defined by the [IMAP](https://datatracker.ietf.org/doc/html/rfc3501) standard in [RFC 3501 (#5.1.3)](https://datatracker.ietf.org/doc/html/rfc3501#section-5.1.3).
+//!
+//! Since this library is currently experimental, only decode is supported.
+//!
+//! Idea is based on Python [mutf7](https://github.com/cheshire-mouse/mutf7) library.
+
 extern crate base64;
 extern crate encoding_rs;
 extern crate regex;
@@ -5,19 +11,22 @@ extern crate regex;
 use encoding_rs::UTF_16BE;
 use regex::Regex;
 
-/**
- * Decode UTF-7 IMAP mailbox name
- *
- * https://datatracker.ietf.org/doc/html/rfc3501#section-5.1.3
- * Based on https://github.com/cheshire-mouse/mutf7
- */
+/// Decode UTF-7 IMAP mailbox name
+///
+/// <https://datatracker.ietf.org/doc/html/rfc3501#section-5.1.3>
+///
+/// # Usage:
+///
+/// ```
+/// let test_string = String::from("&BB4EQgQ,BEAEMAQyBDsENQQ9BD0ESwQ1-");
+/// assert_eq!(decode_utf7_imap(test_string), "Отправленные");
+/// ```
 pub fn decode_utf7_imap(text: String) -> String {
   let re = Regex::new(r"&[^&-]*-").unwrap();
   let mut result = text.clone();
 
   for cap in re.captures_iter(&text) {
     let encoded_text = cap.get(0).map_or("", |m| m.as_str());
-    println!("{}", encoded_text);
     let decoded_text = decode_utf7_part(String::from(encoded_text));
 
     result = text.replace(&encoded_text, &decoded_text);
@@ -51,7 +60,7 @@ mod tests {
 
   #[test]
   fn decode_test() {
-    let test_string = "&BB4EQgQ,BEAEMAQyBDsENQQ9BD0ESwQ1-";
-    assert_eq!(decode_utf7_imap(String::from(test_string)), "Отправленные");
+    let test_string = String::from("&BB4EQgQ,BEAEMAQyBDsENQQ9BD0ESwQ1-");
+    assert_eq!(decode_utf7_imap(test_string), "Отправленные");
   }
 }
