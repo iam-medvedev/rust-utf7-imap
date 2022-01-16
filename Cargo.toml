@@ -1,6 +1,6 @@
 [package]
 name = "utf7-imap"
-version = "0.1.0"
+version = "0.2.0"
 authors = ["Ilya Medvedev <ilya@medvedev.im>"]
 license = "MIT"
 homepage = "https://github.com/iam-medvedev/rust-utf7-imap"
