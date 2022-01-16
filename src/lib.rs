@@ -31,7 +31,7 @@ pub fn decode_utf7_imap(text: String) -> String {
     let encoded_text = cap.get(0).map_or("", |m| m.as_str());
     let decoded_text = decode_utf7_part(String::from(encoded_text));
 
-    result = text.replace(&encoded_text, &decoded_text);
+    result = result.replace(&encoded_text, &decoded_text);
   }
 
   return result;
@@ -63,5 +63,11 @@ mod tests {
   fn decode_test() {
     let test_string = String::from("&BB4EQgQ,BEAEMAQyBDsENQQ9BD0ESwQ1-");
     assert_eq!(decode_utf7_imap(test_string), "Отправленные");
+  }
+  #[test]
+  fn decode_test_split() {
+    // input string with utf7 encoded bits being separated by ascii
+    let test_string = String::from("&AWA-iuk&AWE-liad&ARcBfgEX-");
+    assert_eq!(decode_utf7_imap(test_string), "Šiukšliadėžė")
   }
 }
