@@ -1,15 +1,15 @@
 [package]
 name = "utf7-imap"
-version = "0.2.0"
-authors = ["Ilya Medvedev <ilya@medvedev.im>"]
+version = "0.3.0"
+authors = ["Ilya Medvedev <ilya@medvedev.im>", "Olivier ROLAND <newca12@users.noreply.github.com>"]
 license = "MIT"
 homepage = "https://github.com/iam-medvedev/rust-utf7-imap"
 repository = "https://github.com/iam-medvedev/rust-utf7-imap"
-description = "Mailbox names decoder (UTF-7 IMAP RFC 3501)"
+description = "Mailbox names encoder and decoder (UTF-7 IMAP RFC 3501)"
 keywords = ["mailbox", "decoder", "utf7", "imap", "rfc3501"]
 categories = ["parsing","encoding"]
 readme = "README.md"
-maintenance = { status = "experimental" }
+maintenance = { status = "passively-maintained" }
 
 [dependencies]
 regex = "1.5"

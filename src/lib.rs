@@ -1,7 +1,5 @@
 //! A Rust library for encoding and decoding [UTF-7](https://datatracker.ietf.org/doc/html/rfc2152) string as defined by the [IMAP](https://datatracker.ietf.org/doc/html/rfc3501) standard in [RFC 3501 (#5.1.3)](https://datatracker.ietf.org/doc/html/rfc3501#section-5.1.3).
 //!
-//! Since this library is currently experimental, only decode is supported.
-//!
 //! Idea is based on Python [mutf7](https://github.com/cheshire-mouse/mutf7) library.
 
 extern crate base64;
