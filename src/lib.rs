@@ -88,7 +88,7 @@ fn encode_modified_utf7(text: String) -> String {
         input.extend_from_slice(&value.to_be_bytes());
     }
     let text_u16 = base64::encode(input);
-    let text_u16 = text_u16.strip_suffix('=').unwrap_or(text_u16.as_str());
+    let text_u16 = text_u16.trim_end_matches('=');
     let result = text_u16.replace('/', ",");
     format!("&{}-", result)
 }
@@ -154,6 +154,13 @@ mod tests {
         let test_string = String::from("Šiukšliadėžė");
         assert_eq!(encode_utf7_imap(test_string), "&AWA-iuk&AWE-liad&ARcBfgEX-")
     }
+
+    #[test]
+    fn encode_consecutive_accents() {
+        let test_string = String::from("théâtre");
+        assert_eq!(encode_utf7_imap(test_string), "th&AOkA4g-tre")
+    }
+
     #[test]
     fn decode_test() {
         let test_string = String::from("&BB4EQgQ,BEAEMAQyBDsENQQ9BD0ESwQ1-");
@@ -164,5 +171,11 @@ mod tests {
         // input string with utf7 encoded bits being separated by ascii
         let test_string = String::from("&AWA-iuk&AWE-liad&ARcBfgEX-");
         assert_eq!(decode_utf7_imap(test_string), "Šiukšliadėžė")
+    }
+
+    #[test]
+    fn decode_consecutive_accents() {
+        let test_string = String::from("th&AOkA4g-tre");
+        assert_eq!(decode_utf7_imap(test_string), "théâtre")
     }
 }
