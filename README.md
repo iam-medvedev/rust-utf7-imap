@@ -1,7 +1,7 @@
 # utf7-imap
 
 [![Test Status](https://github.com/iam-medvedev/rust-utf7-imap/workflows/test/badge.svg?event=push)](https://github.com/iam-medvedev/rust-utf7-imap/actions)
-[![Crate](https://img.shields.io/crates/v/utf7-imap.svg)](https://crates.io/crates/utf7-imap)
+[![Crate](https://img.shields.io/crates/v/utf7-imap.svg?color=green)](https://crates.io/crates/utf7-imap)
 [![API](https://docs.rs/utf7-imap/badge.svg)](https://docs.rs/utf7-imap)
 
 A Rust library for encoding and decoding [UTF-7](https://datatracker.ietf.org/doc/html/rfc2152) string as defined by the [IMAP](https://datatracker.ietf.org/doc/html/rfc3501) standard in [RFC 3501 (#5.1.3)](https://datatracker.ietf.org/doc/html/rfc3501#section-5.1.3).
