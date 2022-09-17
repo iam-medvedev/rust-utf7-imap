@@ -14,7 +14,7 @@ Add this to your `Cargo.toml`:
 
 ```toml
 [dependencies]
-utf7-imap = "0.3.0"
+utf7-imap = "0.3.1"
 ```
 
 ### Encode
