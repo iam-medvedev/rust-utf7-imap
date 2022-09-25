@@ -178,4 +178,13 @@ mod tests {
         let test_string = String::from("th&AOkA4g-tre");
         assert_eq!(decode_utf7_imap(test_string), "théâtre")
     }
+
+    use proptest::prelude::*;
+    proptest! {
+        #![proptest_config(ProptestConfig::with_cases(10000))]
+        #[test]
+        fn fuzzy_dec_enc_check(s in "\\PC*") {
+            assert_eq!(decode_utf7_imap(encode_utf7_imap(s.clone())),s)
+        }
+    }
 }
