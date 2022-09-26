@@ -7,7 +7,7 @@ extern crate encoding_rs;
 extern crate regex;
 
 use encoding_rs::UTF_16BE;
-use regex::Regex;
+use regex::{Captures, Regex};
 
 /// Encode UTF-7 IMAP mailbox name
 ///
@@ -106,17 +106,16 @@ fn encode_modified_utf7(text: String) -> String {
 /// assert_eq!(decode_utf7_imap(test_string), "Отправленные");
 /// ```
 pub fn decode_utf7_imap(text: String) -> String {
-    let re = Regex::new(r"&[^&-]*-").unwrap();
-    let mut result = text.clone();
+    let pattern = Regex::new(r"&([^-]*)-").unwrap();
+    pattern.replace_all(&text, expand).to_string()
+}
 
-    for cap in re.captures_iter(&text) {
-        let encoded_text = cap.get(0).map_or("", |m| m.as_str());
-        let decoded_text = decode_utf7_part(String::from(encoded_text));
-
-        result = result.replace(&encoded_text, &decoded_text);
+fn expand(cap: &Captures) -> String {
+    if cap.get(1).unwrap().as_str() == "" {
+        "&".to_string()
+    } else {
+        decode_utf7_part(cap.get(0).unwrap().as_str().to_string())
     }
-
-    result
 }
 
 fn decode_utf7_part(text: String) -> String {
@@ -177,5 +176,14 @@ mod tests {
     fn decode_consecutive_accents() {
         let test_string = String::from("th&AOkA4g-tre");
         assert_eq!(decode_utf7_imap(test_string), "théâtre")
+    }
+
+    use proptest::prelude::*;
+    proptest! {
+        #![proptest_config(ProptestConfig::with_cases(10000))]
+        #[test]
+        fn fuzzy_dec_enc_check(s in "\\PC*") {
+            assert_eq!(decode_utf7_imap(encode_utf7_imap(s.clone())),s)
+        }
     }
 }

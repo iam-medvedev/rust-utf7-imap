@@ -8,10 +8,14 @@ repository = "https://github.com/iam-medvedev/rust-utf7-imap"
 description = "Mailbox names encoder and decoder (UTF-7 IMAP RFC 3501)"
 keywords = ["mailbox", "decoder", "utf7", "imap", "rfc3501"]
 categories = ["parsing","encoding"]
+edition = "2021"
 readme = "README.md"
 maintenance = { status = "passively-maintained" }
 
 [dependencies]
-regex = "1.5"
+regex = "1.6"
 base64 = "0.13"
 encoding_rs = "0.8"
+
+[dev-dependencies]
+proptest = "1.0.0"
